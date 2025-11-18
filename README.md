@@ -44,7 +44,7 @@ To build an interactive and visual tool to **compare RL agents**, understand the
 
 ## ⚙️ Installation & Setup (Windows)
 
-```bash
+
 # Clone the repository
 git clone https://github.com/utkarsh4863/CartPole-Game-Using-Reinforcement-Learning-.git
 cd "CartPole game project using RL"
