@@ -25,6 +25,15 @@ Build an interactive and visual tool to **compare RL agents**, understand their 
 
 ---
 
+## 🌐 Live Demo
+
+Try the CartPole RL Game live on Streamlit:
+
+[Open the app in your browser](https://mvxe7kkcg2fpyiuwpfmpkf.streamlit.app/)
+
+---
+
+
 ## 🧠 Tech Stack
 
 | Category          | Tools                       |
