@@ -81,17 +81,17 @@ streamlit run streamlit_app.py
 
 
 # 1. Jupyter Notebook
-# - Train SARSA, REINFORCE, DQN agents
-# - Compare their rewards
-# - Save trained models in the models/ folder
+- Train SARSA, REINFORCE, DQN agents
+- Compare their rewards
+- Save trained models in the models/ folder
 jupyter notebook "CartPole game using  RL.ipynb"
 
 # 2. Streamlit App
-# - Choose agent (Random, SARSA, REINFORCE, DQN)
-# - Set number of episodes
-# - Adjust FPS for rendering
-# - Click 'Run' to start simulation
-# - Live reward stats and reward bar chart displayed
+- Choose agent (Random, SARSA, REINFORCE, DQN)
+- Set number of episodes
+- Adjust FPS for rendering
+- Click 'Run' to start simulation
+- Live reward stats and reward bar chart displayed
 streamlit run streamlit_app.py
 
 ---
@@ -100,27 +100,27 @@ streamlit run streamlit_app.py
 
 
 ## 📁 Folder Structure
+```
 
-
-# CartPole game project using RL/
-# │── CartPole game using  RL.ipynb
-# │── streamlit_app.py
-# │── models/
-# │     ├── sarsa_Q.npy
-# │     ├── reinforce_policy.pth
-# │     └── dqn_net.pth
-# │── requirements.txt
-# │── .gitignore
-# │── README.md
-
+ CartPole game project using RL/
+ │── CartPole game using  RL.ipynb
+ │── streamlit_app.py
+ │── models/
+ │     ├── sarsa_Q.npy
+ │     ├── reinforce_policy.pth
+ │     └── dqn_net.pth
+ │── requirements.txt
+ │── .gitignore
+ │── README.md
+```
 
 ---
 
 ##⚡ Notes
 
-# The models/ folder contains pre-trained agents for direct use in Streamlit.
-# If you want to retrain models, run the notebook and save the models in the same folder.
-# Streamlit app depends on the models; if models are missing, the agents will run randomly.
+ The models/ folder contains pre-trained agents for direct use in Streamlit.
+ If you want to retrain models, run the notebook and save the models in the same folder.
+ Streamlit app depends on the models; if models are missing, the agents will run randomly.
 
 ---
 
