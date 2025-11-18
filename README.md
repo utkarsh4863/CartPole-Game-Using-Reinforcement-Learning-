@@ -78,7 +78,7 @@ streamlit run streamlit_app.py
 
 
 ## 📓 Usage (Windows)
-```
+
 
 # 1. Jupyter Notebook
 # - Train SARSA, REINFORCE, DQN agents
@@ -93,14 +93,14 @@ jupyter notebook "CartPole game using  RL.ipynb"
 # - Click 'Run' to start simulation
 # - Live reward stats and reward bar chart displayed
 streamlit run streamlit_app.py
-```
+
 ---
 
 
 
 
-### 📁 Folder Structure
-```
+## 📁 Folder Structure
+
 
 # CartPole game project using RL/
 # │── CartPole game using  RL.ipynb
@@ -112,16 +112,16 @@ streamlit run streamlit_app.py
 # │── requirements.txt
 # │── .gitignore
 # │── README.md
-```
+
 
 ---
 
-### ⚡ Notes
-```
+##⚡ Notes
+
 # The models/ folder contains pre-trained agents for direct use in Streamlit.
 # If you want to retrain models, run the notebook and save the models in the same folder.
 # Streamlit app depends on the models; if models are missing, the agents will run randomly.
-```
+
 ---
 
 ## 🧩 Author
