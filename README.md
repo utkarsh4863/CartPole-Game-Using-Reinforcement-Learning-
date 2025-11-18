@@ -45,26 +45,38 @@ To build an interactive and visual tool to **compare RL agents**, understand the
 ## ⚙️ Installation & Setup (Windows)
 
 
-# Clone the repository
+### Clone the repository
+```bash
 git clone https://github.com/utkarsh4863/CartPole-Game-Using-Reinforcement-Learning-.git
 cd "CartPole game project using RL"
+```
 
-# Create a virtual environment
+### Create a virtual environment
+```bash
 python -m venv venv
+```
 
-# Activate the virtual environment
+### Activate the virtual environment
+```bash
 venv\Scripts\activate
+```
 
-# Install required dependencies
+### Install required dependencies
+```bash
 pip install -r requirements.txt
-
-# Run Jupyter Notebook (optional)
+```
+### Run Jupyter Notebook (optional)
+```bash
 jupyter notebook "CartPole game using  RL.ipynb"
+```
 
-# Or run Streamlit app to see real-time gameplay
+### Or run Streamlit app to see real-time gameplay
+```bash
 streamlit run streamlit_app.py
-
+```
 ---
+
+
 ## 📓 Usage (Windows)
 
 # 1. Jupyter Notebook
@@ -83,10 +95,12 @@ streamlit run streamlit_app.py
 
 ---
 
-## 📁 Folder Structure
 
 
-# 📁 Folder Structure
+
+### 📁 Folder Structure
+```
+
 # CartPole game project using RL/
 # │── CartPole game using  RL.ipynb
 # │── streamlit_app.py
@@ -97,8 +111,12 @@ streamlit run streamlit_app.py
 # │── requirements.txt
 # │── .gitignore
 # │── README.md
+```
 
-# ⚡ Notes
+---
+
+### ⚡ Notes
+
 # The models/ folder contains pre-trained agents for direct use in Streamlit.
 # If you want to retrain models, run the notebook and save the models in the same folder.
 # Streamlit app depends on the models; if models are missing, the agents will run randomly.
@@ -107,7 +125,7 @@ streamlit run streamlit_app.py
 
 ## 🧩 Author
 
-##Utkarsh Kashyap##
+**Utkarsh Kashyap**
 
 
 
