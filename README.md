@@ -118,9 +118,9 @@ streamlit run streamlit_app.py
 
 ##⚡ Notes
 
- The models/ folder contains pre-trained agents for direct use in Streamlit.
- If you want to retrain models, run the notebook and save the models in the same folder.
- Streamlit app depends on the models; if models are missing, the agents will run randomly.
+ -The models/ folder contains pre-trained agents for direct use in Streamlit.
+ -If you want to retrain models, run the notebook and save the models in the same folder.
+ -Streamlit app depends on the models; if models are missing, the agents will run randomly.
 
 ---
 
