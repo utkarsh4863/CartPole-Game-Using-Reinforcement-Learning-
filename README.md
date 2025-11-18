@@ -1,24 +1,48 @@
-# CartPole Game Using Reinforcement Learning
+# 🚀 CartPole Game Using Reinforcement Learning
 
 This project demonstrates and compares different Reinforcement Learning (RL) algorithms on the classic **CartPole-v1** environment from OpenAI Gymnasium.  
 You can train, evaluate, and visualize agents directly in a Jupyter Notebook, and also run a **Streamlit app** to see the gameplay in real-time.
 
-## 🚀 Features
-
-- Implemented Agents:
-  - **Random Policy**  
-  - **SARSA (Tabular)**  
-  - **REINFORCE (Policy Gradient)**  
-  - **DQN (Deep Q-Network)**
-
-- Compare rewards across agents  
-- Visualize gameplay in **Streamlit app**  
-- Models saved for direct use (no retraining required)  
+The project is designed for users who want to:
+- Compare different RL agents (Random, SARSA, REINFORCE, DQN)  
+- Visualize agent performance  
+- Understand reinforcement learning in a practical, interactive way  
 
 ---
 
+## 🧩 Key Components
 
-## 🛠 Installation & Setup (Windows)
+- **Implemented Agents**:
+  - Random Policy  
+  - SARSA (Tabular)  
+  - REINFORCE (Policy Gradient)  
+  - DQN (Deep Q-Network)  
+
+- **Streamlit App**: Visualizes real-time gameplay with reward statistics  
+- **Jupyter Notebook**: Train and evaluate agents  
+- **Saved Models**: Pre-trained models for direct use without retraining  
+
+---
+
+## 🎯 Objective
+
+To build an interactive and visual tool to **compare RL agents**, understand their performance, and learn reinforcement learning concepts practically.  
+
+---
+
+## 🧠 Tech Stack
+
+| Category       | Tools |
+|----------------|-------|
+| **Language**   | Python 🐍 |
+| **Frameworks** | Gymnasium, Streamlit, PyTorch |
+| **Libraries**  | numpy, matplotlib |
+| **Visualization** | Streamlit / Matplotlib |
+| **Environment** | OpenAI Gymnasium CartPole-v1 |
+
+---
+
+## ⚙️ Installation & Setup (Windows)
 
 ```bash
 # Clone the repository
@@ -37,42 +61,53 @@ pip install -r requirements.txt
 # Run Jupyter Notebook (optional)
 jupyter notebook "CartPole game using  RL.ipynb"
 
-# Or run Streamlit app to see gameplay
+# Or run Streamlit app to see real-time gameplay
 streamlit run streamlit_app.py
 
+---
 ## 📓 Usage (Windows)
 
-```bash
-# 1. Run Jupyter Notebook to train or evaluate agents
-jupyter notebook "CartPole game using  RL.ipynb"
-
+# 1. Jupyter Notebook
 # - Train SARSA, REINFORCE, DQN agents
 # - Compare their rewards
 # - Save trained models in the models/ folder
+jupyter notebook "CartPole game using  RL.ipynb"
 
-# 2. Run Streamlit app to see real-time gameplay
-streamlit run streamlit_app.py
-
-# Sidebar options in Streamlit app:
+# 2. Streamlit App
 # - Choose agent (Random, SARSA, REINFORCE, DQN)
 # - Set number of episodes
 # - Adjust FPS for rendering
-# Click 'Run' to start the simulation
-# Gameplay will display live reward stats and a reward bar chart
+# - Click 'Run' to start simulation
+# - Live reward stats and reward bar chart displayed
+streamlit run streamlit_app.py
+
+---
 
 ## 📁 Folder Structure
-CartPole game project using RL/
-│── CartPole game using RL.ipynb
-│── streamlit_app.py
-│── models/
-│ ├── sarsa_Q.npy
-│ ├── reinforce_policy.pth
-│ └── dqn_net.pth
-│── requirements.txt
-│── .gitignore
-│── README.md
 
-💻 License
-# This project is open-source for educational purposes.
+
+# 📁 Folder Structure
+# CartPole game project using RL/
+# │── CartPole game using  RL.ipynb
+# │── streamlit_app.py
+# │── models/
+# │     ├── sarsa_Q.npy
+# │     ├── reinforce_policy.pth
+# │     └── dqn_net.pth
+# │── requirements.txt
+# │── .gitignore
+# │── README.md
+
+# ⚡ Notes
+# The models/ folder contains pre-trained agents for direct use in Streamlit.
+# If you want to retrain models, run the notebook and save the models in the same folder.
+# Streamlit app depends on the models; if models are missing, the agents will run randomly.
+
+---
+
+## 🧩 Author
+
+##Utkarsh Kashyap##
+
 
 
