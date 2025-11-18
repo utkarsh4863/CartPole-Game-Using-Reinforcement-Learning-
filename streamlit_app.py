@@ -1,4 +1,4 @@
-# streamlit_app.py
+# streamlit_app.py - FIXED
 import streamlit as st
 import gymnasium as gym
 import numpy as np
@@ -10,7 +10,7 @@ from io import BytesIO
 st.set_page_config(layout="wide")
 st.title("CartPole — Compare RL Agents")
 
-MODEL_DIR = "models"
+MODEL_DIR = "models" 
 
 agent = st.sidebar.selectbox("Choose agent", 
     ["Random", "SARSA (loaded)", "REINFORCE (loaded)", "DQN (loaded)"])
@@ -19,7 +19,7 @@ render_fps = st.sidebar.slider("FPS", 1, 60, 20)
 run_button = st.sidebar.button("Run")
 
 # ------------------------------------------------
-# 🔹 Load models (SARSA Q-table, REINFORCE policy, DQN)
+# 🔹 Load models (Model class structure fixed to match .pth files)
 # ------------------------------------------------
 @st.cache_resource
 def load_models():
@@ -28,15 +28,17 @@ def load_models():
     # ---------- SARSA ----------
     try:
         res['sarsa'] = np.load(f"{MODEL_DIR}/sarsa_Q.npy", allow_pickle=True)
-    except:
+    except Exception as e:
+        st.warning(f"Could not load SARSA model: {e}")
         res['sarsa'] = None
 
-    # ---------- REINFORCE ----------
+    # ---------- REINFORCE (FIXED CLASS NAME) ----------
     try:
         class PolicyNet(torch.nn.Module):
             def __init__(self):
                 super().__init__()
-                self.layers = torch.nn.Sequential(
+                # ✅ FIX: Renamed 'self.layers' to 'self.net'
+                self.net = torch.nn.Sequential(
                     torch.nn.Linear(4, 128),
                     torch.nn.ReLU(),
                     torch.nn.Linear(128, 2),
@@ -44,32 +46,37 @@ def load_models():
                 )
 
             def forward(self, x):
-                return self.layers(x)
+                return self.net(x) # ✅ FIX: Use self.net
 
         p = PolicyNet()
         p.load_state_dict(torch.load(f"{MODEL_DIR}/reinforce_policy.pth", map_location="cpu"))
+        p.eval() 
         res['reinforce'] = p
-    except:
+    except Exception as e:
+        st.warning(f"Could not load REINFORCE model: {e}")
         res['reinforce'] = None
 
-    # ---------- DQN ----------
+    # ---------- DQN (FIXED CLASS NAME) ----------
     try:
         class DQNNet(torch.nn.Module):
             def __init__(self):
                 super().__init__()
-                self.layers = torch.nn.Sequential(
+                # ✅ FIX: Renamed 'self.layers' to 'self.net'
+                self.net = torch.nn.Sequential(
                     torch.nn.Linear(4,128), torch.nn.ReLU(),
                     torch.nn.Linear(128,128), torch.nn.ReLU(),
                     torch.nn.Linear(128,2)
                 )
 
             def forward(self, x):
-                return self.layers(x)
+                return self.net(x) # ✅ FIX: Use self.net
 
         dqn = DQNNet()
         dqn.load_state_dict(torch.load(f"{MODEL_DIR}/dqn_net.pth", map_location="cpu"))
+        dqn.eval() 
         res['dqn'] = dqn
-    except:
+    except Exception as e:
+        st.warning(f"Could not load DQN model: {e}")
         res['dqn'] = None
 
     return res
@@ -77,30 +84,30 @@ def load_models():
 models = load_models()
 
 # ------------------------------------------------
-# 🔹 Frame renderer
+# 🔹 Frame renderer (Code is correct)
 # ------------------------------------------------
 def render_frame(env):
     frame = env.render()
     if isinstance(frame, np.ndarray):
         img = Image.fromarray(frame)
     else:
-        img = Image.new("RGB", (600, 400))
+        img = Image.new("RGB", (600, 400), color='black') 
     buf = BytesIO()
     img.save(buf, format="PNG")
     return buf.getvalue()
 
 # ------------------------------------------------
-# 🔹 RUN SIMULATION
+# 🔹 RUN SIMULATION (Action logic is correct, just needs 'net' name matching)
 # ------------------------------------------------
 if run_button:
-    env = gym.make("CartPole-v1", render_mode="rgb_array")
+    env = gym.make("CartPole-v1", render_mode="rgb_array") 
 
     cols = st.columns([2, 1])
     img_holder = cols[0].empty()
     stat_box = cols[1].empty()
 
     all_rewards = []
-
+    
     for ep in range(episodes):
         obs, _ = env.reset(seed=ep)
         done = False
@@ -109,9 +116,12 @@ if run_button:
         while not done:
 
             # --- Choose action based on agent ---
+            
+            # 1. RANDOM 
             if agent == "Random":
                 a = env.action_space.sample()
 
+            # 2. SARSA (loaded)
             elif agent == "SARSA (loaded)":
                 Q = models['sarsa']
                 if Q is None:
@@ -125,6 +135,7 @@ if run_button:
                     s = tuple(np.clip(digit.astype(int), 0, bins - 1))
                     a = int(np.argmax(Q[s]))
 
+            # 3. REINFORCE (loaded)
             elif agent == "REINFORCE (loaded)":
                 net = models['reinforce']
                 if net is None:
@@ -132,26 +143,30 @@ if run_button:
                 else:
                     with torch.no_grad():
                         obs_t = torch.tensor(obs, dtype=torch.float32).unsqueeze(0)
+                        net.eval() 
                         probs = net(obs_t).numpy()[0]
-                    a = int(np.argmax(probs))
+                    a = int(np.argmax(probs)) 
 
+            # 4. DQN (loaded)
             elif agent == "DQN (loaded)":
                 net = models['dqn']
                 if net is None:
                     a = env.action_space.sample()
                 else:
                     with torch.no_grad():
-                        q = net(torch.tensor(obs, dtype=torch.float32).unsqueeze(0)).numpy()[0]
+                        obs_t = torch.tensor(obs, dtype=torch.float32).unsqueeze(0)
+                        net.eval()
+                        q = net(obs_t).numpy()[0]
                     a = int(np.argmax(q))
 
             # --- Step environment ---
-            obs, reward, terminated, truncated, _ = env.step(a)
+            obs, reward, terminated, truncated, info = env.step(a)
             done = terminated or truncated
             total_reward += reward
 
-            # --- Render frame ---
+            # --- Render frame and stats ---
             frame = render_frame(env)
-            img_holder.image(frame, use_container_width=True)  # ✅ updated parameter
+            img_holder.image(frame, use_container_width=True) 
             stat_box.markdown(
                 f"### Episode: {ep+1}/{episodes}\n"
                 f"Reward: **{total_reward:.1f}**"
